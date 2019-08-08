@@ -46,7 +46,7 @@ function decript(answer){
     answer.decifrado = messageMin;
     
     //fazendo e atualizando o resumo criptografico no json
-       answer.resumo_criptografico = CryptoJS.SHA1(messageDec);
+       answer.resumo_criptografico = CryptoJS.SHA1(messageMin);
        //var result = CryptoJS.enc.Hex.stringify(hash);  ??
 
 
