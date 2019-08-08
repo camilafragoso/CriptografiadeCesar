@@ -28,37 +28,22 @@ function decript(answer){
 
     var numCasas = answer.numero_casas;
 
-    //criando um novo array para receber cada letra da string como elemento
-    var newArray = [];
+    //converter para minusculo
+    var messageMin = answer.cifrado.toLowerCase();
 
-    for (i = 0; i < n; i++) {
-
-        //converter para minusculo
-        var messageMin = answer.cifrado.toLowerCase();
-
-        //Colocando cada letra da string como elemento no array
-        newArray.push(messageMin.substr(i, 1)); 
-    }
-
-    //comparar cada letra do newArray com o alfabeto e subtrair com o alfabet[-numCasas]//
+    //comparar cada letra da messageMin com o alfabeto e subtrair com o alfabet[-numCasas]//
     for (i = 0; i < n; i++) {
         for (j = 0; j < 26; j++){
             //so funciona para letras
-            if (newArray[i] == alfabet[j]){
-                newArray[i] = alfabet[(j - numCasas)];
-                //ou newArray[i] = alfabet.substr(j - numCasas, 1); ?
+            if (messageMin[i] == alfabet[j]){
+                messageMin[i] = alfabet[(j - numCasas)];
+                //ou messageMin[i] = alfabet.substr(j - numCasas, 1); ?
             }
         }
     }
 
-    //converter o newArray para string
-    var messageDec;
-    for(i = 0; i < newArray.length; i++){
-        messageDec = messageDec + newArray[i];
-    }
-
     //atualizando a mensagem decifrada no json
-    answer.decifrado = messageDec;
+    answer.decifrado = messageMin;
     
     //fazendo e atualizando o resumo criptografico no json
        answer.resumo_criptografico = CryptoJS.SHA1(messageDec);
