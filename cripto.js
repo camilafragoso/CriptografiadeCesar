@@ -1,5 +1,5 @@
 
-let alfabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+let alfabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
 //requisição http
 var httpRequest;
@@ -13,11 +13,11 @@ httpRequest.open('GET', 'https://api.codenation.dev/v1/challenge/dev-ps/generate
 
 httpRequest.send();
 
-//salvar em um arquivo answer.json ??
-
-//pega o texto e salva numa variável - nao é o que o desafio pede
+//pega o texto e salva numa variável
 var answer = httpRequest.responseText;
 
+//salvar em um ARQUIVO answer.json ??
+answer = JSON.parse(answer);
 
 //acionando a função
 httpRequest.onreadystatechange = decript;
@@ -32,6 +32,7 @@ function decript(answer){
     var messageMin = answer.cifrado.toLowerCase();
 
     //comparar cada letra da messageMin com o alfabeto e subtrair com o alfabet[-numCasas]//
+    //verificar se tratando o messageMin como string muda a comparação i < n  
     for (i = 0; i < n; i++) {
         for (j = 0; j < 26; j++){
             //so funciona para letras
@@ -46,8 +47,7 @@ function decript(answer){
     answer.decifrado = messageMin;
     
     //fazendo e atualizando o resumo criptografico no json ??
-        var intermediaria = CryptoJS.SHA1(messageMin);
-        answer.resumo_criptografico = CryptoJS.enc.Hex.stringify(intermediaria); 
+        answer.resumo_criptografico = CryptoJS.SHA1(messageMin);
 
     //enviando para o site
 }
