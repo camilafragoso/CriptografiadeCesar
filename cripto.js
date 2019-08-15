@@ -1,27 +1,22 @@
 
 let alfabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
-//requisição http
-var httpRequest;
-if (window.XMLHttpRequest) { // Mozilla, Safari, etc
-    httpRequest = new XMLHttpRequest();
-} else if (window.ActiveXObject) { // IE 8 ou outro
-    httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+//requisição
+var axios = require("axios");
+var fs = require('fs');
+
+function getInfo(){
+    return axios.get("https://api.codenation.dev/v1/challenge/dev-ps/generate-data?token=3bb97111fc2b09ab6decac4244ed7c3b5ab550e7");
 }
 
-httpRequest.open('GET', 'https://api.codenation.dev/v1/challenge/dev-ps/generate-data?token=3bb97111fc2b09ab6decac4244ed7c3b5ab550e7', true); //assíncrona
+//função p escrever no json
+async function simpleFileWriteSync(filePath) {
+    var data = await getInfo();
+    var options = {encoding:'utf-8', flag:'w'};
+    fs.writeFileSync(filePath, JSON.stringify(data.data), options);  
+} simpleFileWriteSync('answer.json');
 
-httpRequest.send();
-
-//pega o texto e salva numa variável
-var answer = httpRequest.responseText;
-
-//salvar em um ARQUIVO answer.json ??
-answer = JSON.parse(answer);
-
-//acionando a função
-httpRequest.onreadystatechange = decript;
-
+//pegar info do json
 
 //funcao descript
 function decript(answer){
@@ -43,11 +38,14 @@ function decript(answer){
         }
     }
 
+    console.log(messageMin);
+
     //atualizando a mensagem decifrada no json
     answer.decifrado = messageMin;
     
     //fazendo e atualizando o resumo criptografico no json ??
         answer.resumo_criptografico = CryptoJS.SHA1(messageMin);
+        console.log(answer);
 
-    //enviando para o site
-}
+    // Send a POST request
+    
