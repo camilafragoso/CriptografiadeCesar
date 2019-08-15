@@ -1,28 +1,29 @@
 let alfabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
+    //informações para o teste do codigo
     var numCasas = 11;
     var messageMin = "pgpy esp mpde awlyytyr td yze dz zxytdntpye ld ez rpe te ctrse esp qtcde etxp. qcpo mczzvd";
-    messageMin = messageMin.split("");
-   // console.log(messageMin.length);
-   // var num = 15 - numCasas;
-   // console.log(alfabet[num]);
 
-    function decript(numCasas, messageMin){
+    //quebrar a string letra por letra
+    messageMin = messageMin.split("");
+
+    //function decript(numCasas, messageMin){
+    //para cada letra da mensagem criptografada
     for (i = 0; i < messageMin.length; i++) {
+        //comparar com cada letra do alfabeto
         for (j = 0; j < 26; j++){
-            //so funciona para letras
+            var num = j - numCasas;
+            var newNum = 25 - (numCasas - j);
+            //caso seja igual
             if (messageMin[i] == alfabet[j]){
-                var num = j - numCasas;
+                //e caso j seja menor que numCasas 
                 if (j < numCasas){
-                    var subtNum = numCasas - j;
-                    var newNum = 25 - subtNum;
                     messageMin[i] = alfabet[newNum];
-                } else messageMin[i] = alfabet[num];
-                //messageMin[i] = alfabet.substr(j - numCasas, 1); 
+                }//caso j seja maior ou igual a numCasas
+                else messageMin[i] = alfabet[num];
             } 
         }   
-    }
-    messageMin = messageMin.toString();
-    return messageMin; 
-}
-decript(11, "pgpy esp mpde awlyytyr td yze dz zxytdntpye ld ez rpe te ctrse esp qtcde etxp. qcpo mczzvd");
+    } 
+    console.log(messageMin); 
+//}
+//decript(11, "pgpy esp mpde awlyytyr td yze dz zxytdntpye ld ez rpe te ctrse esp qtcde etxp. qcpo mczzvd");
