@@ -16,9 +16,11 @@ async function simpleFileWriteSync(filePath) {
     fs.writeFileSync(filePath, JSON.stringify(data.data), options);  
 } simpleFileWriteSync('answer.json');
 
-//pegar info do json
+//pegar numero de casas do json
+console.log(fs.readFile('answer.json'));
+//pegar mensagem criptografada
 
-//funcao descript
+//funcao decript
 function decript(answer){
 
     var numCasas = answer.numero_casas;
@@ -47,5 +49,5 @@ function decript(answer){
         answer.resumo_criptografico = CryptoJS.SHA1(messageMin);
         console.log(answer);
 
-    // Send a POST request
+    // Send a POST request */
     
